@@ -1,0 +1,12 @@
+# Cloudflare Pages 응답 헤더 — 정적 SPA 보안 기본값.
+# CSP: 스크립트/스타일은 self, connect 는 self + Supabase(REST/Realtime). 인라인 스타일은 React style prop 때문에 허용.
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://*.supabase.co wss://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
+
+# 해시 파일명 정적 자산은 장기 캐시.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
